@@ -19,18 +19,20 @@ async def connect_to_mongo():
         # Get connection URL
         mongo_url = os.getenv("MONGODB_URL")
         
+        # Ensure tlsInsecure is set for Render environment
+        if "tlsInsecure" not in mongo_url:
+            # Add tlsInsecure=true for SSL compatibility
+            separator = "&" if "?" in mongo_url else "?"
+            mongo_url = f"{mongo_url}{separator}tlsInsecure=true"
+        
         db.client = AsyncIOMotorClient(
             mongo_url,
             server_api=ServerApi('1'),
-            ssl=True,  # Enable SSL/TLS
-            retryWrites=True,
-            w='majority',
-            serverSelectionTimeoutMS=5000,  # Reduce timeout for faster feedback
-            connectTimeoutMS=5000
+            serverSelectionTimeoutMS=10000,
+            connectTimeoutMS=10000,
+            socketTimeoutMS=10000
         )
         
-        # Don't verify connection on startup - do it lazily
-        # This allows the app to start even if MongoDB is temporarily unavailable
         print("✓ MongoDB client initialized (connection verified on first request)")
         
     except Exception as e:
