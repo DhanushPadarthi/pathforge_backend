@@ -1,0 +1,9 @@
+[2025-12-31 17:14:37] INFO - resource - Opening resource - Roadmap: 69550493..., Module: a820beda..., Resource: 9bb42a9a...
+[2025-12-31 17:14:37] INFO - resource - Found resource: AWS Tutorial for Beginners, Status: unlocked
+[2025-12-31 17:14:37] INFO - resource - Changed status to in_progress for AWS Tutorial for Beginners
+[2025-12-31 17:14:51] INFO - resource - Opening resource - Roadmap: 69550493..., Module: a820beda..., Resource: 9bb42a9a...
+[2025-12-31 17:14:51] INFO - resource - Found resource: AWS Tutorial for Beginners, Status: in_progress
+[2025-12-31 17:14:51] INFO - resource - Changed status to in_progress for AWS Tutorial for Beginners
+[2025-12-31 17:14:55] INFO - resource - Opening resource - Roadmap: 69550493..., Module: 6d8c540b..., Resource: 29a8eddb...
+[2025-12-31 17:14:55] INFO - resource - Found resource: AWS VPC Tutorial, Status: unlocked
+[2025-12-31 17:14:55] INFO - resource - Changed status to in_progress for AWS VPC Tutorial

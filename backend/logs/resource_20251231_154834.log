@@ -1,0 +1,6 @@
+[2025-12-31 15:48:57] INFO - resource - Opening resource - Roadmap: 6954f88d..., Module: 78fd78bc..., Resource: 14be2361...
+[2025-12-31 15:48:57] INFO - resource - Found resource: Linux Tutorial for Beginners, Status: unlocked
+[2025-12-31 15:48:57] INFO - resource - Changed status to in_progress for Linux Tutorial for Beginners
+[2025-12-31 15:49:13] INFO - resource - Opening resource - Roadmap: 6954f88d..., Module: 78fd78bc..., Resource: 4d8759e9...
+[2025-12-31 15:49:13] INFO - resource - Found resource: Git Documentation, Status: unlocked
+[2025-12-31 15:49:13] INFO - resource - Changed status to in_progress for Git Documentation
