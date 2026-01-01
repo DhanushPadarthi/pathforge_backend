@@ -2,6 +2,7 @@ from motor.motor_asyncio import AsyncIOMotorClient
 from pymongo.server_api import ServerApi
 import os
 from dotenv import load_dotenv
+import ssl
 
 load_dotenv()
 
@@ -16,9 +17,16 @@ async def get_database():
 async def connect_to_mongo():
     """Connect to MongoDB"""
     try:
+        # Create SSL context to handle certificate verification
+        ssl_context = ssl.create_default_context()
+        ssl_context.check_hostname = True
+        ssl_context.verify_mode = ssl.CERT_REQUIRED
+        
         db.client = AsyncIOMotorClient(
             os.getenv("MONGODB_URL"),
-            server_api=ServerApi('1')
+            server_api=ServerApi('1'),
+            tlsCAFile=None,  # Use system CA certificates
+            ssl_context=ssl_context
         )
         # Verify connection
         await db.client.admin.command('ping')
