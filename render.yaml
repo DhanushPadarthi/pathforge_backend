@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: pathforge-backend
+    runtime: python
+    pythonVersion: 3.13
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: MONGODB_URL
+        scope: build
+      - key: DATABASE_NAME
+        value: pathforge
+      - key: GROQ_API_KEY
+        scope: build
+      - key: SECRET_KEY
+        scope: build
+      - key: ENVIRONMENT
+        value: production
+      - key: CORS_ORIGINS
+        value: http://localhost:3000
+      - key: ALGORITHM
+        value: HS256
+      - key: ACCESS_TOKEN_EXPIRE_MINUTES
+        value: '30'
+      - key: FIREBASE_CREDENTIALS_PATH
+        value: ./firebase-credentials.json
