@@ -16,7 +16,7 @@ async def get_database():
 async def connect_to_mongo():
     """Connect to MongoDB"""
     try:
-        # Get connection URL - should already have tlsInsecure parameter if needed
+        # Get connection URL
         mongo_url = os.getenv("MONGODB_URL")
         
         db.client = AsyncIOMotorClient(
@@ -24,13 +24,17 @@ async def connect_to_mongo():
             server_api=ServerApi('1'),
             ssl=True,  # Enable SSL/TLS
             retryWrites=True,
-            w='majority'
+            w='majority',
+            serverSelectionTimeoutMS=5000,  # Reduce timeout for faster feedback
+            connectTimeoutMS=5000
         )
-        # Verify connection
-        await db.client.admin.command('ping')
-        print("✓ Connected to MongoDB successfully!")
+        
+        # Don't verify connection on startup - do it lazily
+        # This allows the app to start even if MongoDB is temporarily unavailable
+        print("✓ MongoDB client initialized (connection verified on first request)")
+        
     except Exception as e:
-        print(f"✗ Error connecting to MongoDB: {e}")
+        print(f"✗ Error initializing MongoDB client: {e}")
         raise
 
 async def close_mongo_connection():
