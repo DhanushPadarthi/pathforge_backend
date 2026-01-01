@@ -34,11 +34,20 @@ app = FastAPI(
 )
 
 # CORS configuration
-origins = os.getenv("CORS_ORIGINS", "http://localhost:3000").split(",")
+cors_origins = [
+    "https://pathforge-mauve.vercel.app",  # Vercel frontend
+    "http://localhost:3000",
+    "http://127.0.0.1:8000",
+    "http://localhost:8000"
+]
+# Allow additional origins from environment variable
+env_origins = os.getenv("CORS_ORIGINS", "")
+if env_origins:
+    cors_origins.extend(env_origins.split(","))
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=cors_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
