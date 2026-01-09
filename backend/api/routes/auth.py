@@ -98,14 +98,30 @@ async def register(user_data: UserRegistration):
         # Create access token
         access_token = create_access_token(str(result.inserted_id))
         
-        # Fetch the created user
+        # Fetch the created user and serialize properly
         user = await users_collection.find_one({"_id": result.inserted_id})
-        user["_id"] = str(user["_id"])
-        del user["password_hash"]
+        
+        user_response = {
+            "_id": str(user["_id"]),
+            "email": user.get("email"),
+            "name": user.get("name"),
+            "role": user.get("role", "student"),
+            "profile_completed": user.get("profile_completed", False),
+            "has_resume": user.get("has_resume", False),
+            "resume_file_id": user.get("resume_file_id"),
+            "resume_filename": user.get("resume_filename"),
+            "current_skills": user.get("current_skills", []),
+            "target_role_id": user.get("target_role_id"),
+            "saved_roadmaps": user.get("saved_roadmaps", []),
+            "available_hours_per_week": user.get("available_hours_per_week"),
+            "notification_preferences": user.get("notification_preferences", {}),
+            "created_at": user.get("created_at").isoformat() if user.get("created_at") else None,
+            "updated_at": user.get("updated_at").isoformat() if user.get("updated_at") else None
+        }
         
         return {
             "message": "User registered successfully",
-            "user": user,
+            "user": user_response,
             "access_token": access_token,
             "token_type": "bearer"
         }
@@ -139,19 +155,36 @@ async def login(credentials: LoginRequest):
         # Create access token
         access_token = create_access_token(str(user["_id"]))
         
-        # Prepare user response
-        user["_id"] = str(user["_id"])
-        del user["password_hash"]
+        # Prepare user response - serialize to safe format
+        user_response = {
+            "_id": str(user["_id"]),
+            "email": user.get("email"),
+            "name": user.get("name"),
+            "role": user.get("role", "student"),
+            "profile_completed": user.get("profile_completed", False),
+            "has_resume": user.get("has_resume", False),
+            "resume_file_id": user.get("resume_file_id"),
+            "resume_filename": user.get("resume_filename"),
+            "current_skills": user.get("current_skills", []),
+            "target_role_id": user.get("target_role_id"),
+            "saved_roadmaps": user.get("saved_roadmaps", []),
+            "available_hours_per_week": user.get("available_hours_per_week"),
+            "notification_preferences": user.get("notification_preferences", {}),
+            "created_at": user.get("created_at").isoformat() if user.get("created_at") else None,
+            "updated_at": user.get("updated_at").isoformat() if user.get("updated_at") else None
+        }
         
         return {
             "message": "Login successful",
-            "user": user,
+            "user": user_response,
             "access_token": access_token,
             "token_type": "bearer"
         }
     except HTTPException:
         raise
     except Exception as e:
+        import traceback
+        traceback.print_exc()
         raise HTTPException(status_code=500, detail=f"Login failed: {str(e)}")
 
 @router.post("/verify")
