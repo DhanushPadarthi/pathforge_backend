@@ -1,1 +1,26 @@
 .vercel
+# Environment Variables
+.env
+.env.local
+.env.*.local
+
+# Credentials
+firebase-credentials.json
+
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+*.egg-info/
+.venv/
+venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+logs/
