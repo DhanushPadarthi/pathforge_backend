@@ -1,0 +1,9 @@
+[2025-12-30 20:49:49] INFO - resource - Opening resource - Roadmap: 69514ce9..., Module: b82c1d47..., Resource: f20e554a...
+[2025-12-30 20:49:49] INFO - resource - Found resource: Full Stack Development Tutorial, Status: unlocked
+[2025-12-30 20:49:49] INFO - resource - Changed status to in_progress for Full Stack Development Tutorial
+[2025-12-30 20:50:03] INFO - resource - Opening resource - Roadmap: 69514ce9..., Module: b82c1d47..., Resource: f20e554a...
+[2025-12-30 20:50:03] INFO - resource - Found resource: Full Stack Development Tutorial, Status: in_progress
+[2025-12-30 20:50:03] INFO - resource - Changed status to in_progress for Full Stack Development Tutorial
+[2025-12-30 20:50:29] INFO - resource - Opening resource - Roadmap: 69514ce9..., Module: 5c9d9f6e..., Resource: 7317bb1c...
+[2025-12-30 20:50:29] INFO - resource - Found resource: SQL Tutorial, Status: unlocked
+[2025-12-30 20:50:29] INFO - resource - Changed status to in_progress for SQL Tutorial
